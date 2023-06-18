@@ -27,7 +27,6 @@ button {
 .is-hidden {
     display: none;
 }
-
 .search-form-wrap {
     display: flex;
     justify-content: center;
@@ -150,7 +149,7 @@ button {
     transition: 0.5s;
 }
 
-.loading-btn:is(:hover, :focus) {
+.loading-btn:is(:hover) {
     color: #d48383;
     background: rgb(170, 170, 170);
 }
