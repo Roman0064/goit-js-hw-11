@@ -34,6 +34,7 @@ function onSubmit(e) {
         Notify.failure("We're sorry, but the search string cannot be empty!");
         return;
     }
+    pageCount = 1;
     refs.gallery.innerHTML = '';
     e.target.reset();
     renderMarkup();
@@ -58,12 +59,17 @@ async function renderMarkup() {
         scroll();
 
         lightBox.refresh();
+
+        if (pageCount === totalPages) {
+            refs.btnLoad.classList.add('is-hidden');
+        } else {
+            refs.btnLoad.classList.remove('is-hidden');
+        }
     } catch (error) {
         console.log(error.message);
         Notify.failure(`Oops, something went wrong: ${error.message}`);
     }
     isLoading = false;
-    refs.btnLoad.classList.remove('is-hidden');
 }
 
 function createImageMarkup(imageList) {
@@ -126,9 +132,7 @@ function loadMore() {
     if (pageCount < totalPages) {
         onLoadMore();
     } else {
-        Notify.failure(
-            "We're sorry, but you've reached the end of search results."
-        );
+        Notify.failure("We're sorry, but you've reached the end of search results.");
         refs.btnLoad.classList.add('is-hidden');
     }
 }
